@@ -1,0 +1,6 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+dispatch_evaluation_results.json
+evaluation_results.json

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "How long does standard shipping take?",
+    "expected_answer": "Standard shipping takes 5-7 business days.",
+    "category": "shipping"
+  },
+  {
+    "id": 2,
+    "question": "Can I return an item?",
+    "expected_answer": "Items can be returned within 30 days of delivery as long as they are unused and in their original packaging.",
+    "category": "returns"
+  },
+  {
+    "id": 3,
+    "question": "When will I receive my refund?",
+    "expected_answer": "Refunds are processed within 5 business days after the returned item is received.",
+    "category": "refunds"
+  },
+  {
+    "id": 4,
+    "question": "How do I reset my password?",
+    "expected_answer": "Click 'Forgot Password' on the login page and follow the instructions sent to your email.",
+    "category": "account"
+  },
+  {
+    "id": 5,
+    "question": "Can I cancel my order?",
+    "expected_answer": "Orders can be cancelled before they are shipped. Contact customer support as soon as possible.",
+    "category": "orders"
+  },
+  {
+    "id": 6,
+    "question": "Do you ship internationally?",
+    "expected_answer": "ShopEasy currently ships only within the United States.",
+    "category": "shipping"
+  },
+  {
+    "id": 7,
+    "question": "What is your return policy?",
+    "expected_answer": "Items can be returned within 30 days of delivery if they are unused and in their original packaging.",
+    "category": "returns"
+  },
+  {
+    "id": 8,
+    "question": "My package says delivered but I cannot find it. What should I do?",
+    "expected_answer": "Check around your delivery location and with neighbors first. If you still cannot find it, contact customer support.",
+    "category": "shipping"
+  },
+  {
+    "id": 9,
+    "question": "Can I change my shipping address after ordering?",
+    "expected_answer": "Contact customer support immediately. Address changes may be possible if the order has not shipped.",
+    "category": "orders"
+  },
+  {
+    "id": 10,
+    "question": "Do you offer overnight shipping?",
+    "expected_answer": "Yes. Overnight shipping is available for an additional fee.",
+    "category": "shipping"
+  }
+]
