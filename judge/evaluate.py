@@ -25,14 +25,12 @@ for test_case in test_cases:
     else:
         actual_error = "No validation error."
 
-
     # Ask Claude to evaluate the error message
     evaluation = evaluate_answer(
         question=f"Validate this Dispatch event configuration: {test_case}",
         expected_answer=expected_error,
         actual_answer=actual_error
     )
-
 
     result = {
         "id": test_id,
@@ -44,7 +42,6 @@ for test_case in test_cases:
 
     results.append(result)
 
-
     print("\n" + "=" * 70)
     print(f"Test Case: {test_id}")
     print(f"Expected: {expected_error}")
@@ -53,29 +50,56 @@ for test_case in test_cases:
     print(f"Pass:     {evaluation['pass']}")
 
 
-# Save results
+# Save detailed results
 with open("dispatch_evaluation_results.json", "w") as f:
     json.dump(results, f, indent=4)
 
 
-# Summary
-passed = sum(
-    1 for result in results
-    if result["evaluation"]["pass"]
-)
+# --------------------------------------------------
+# Judge performance metrics
+# --------------------------------------------------
+
+true_positives = 0
+true_negatives = 0
+false_positives = 0
+false_negatives = 0
+
+for result in results:
+
+    test_id = result["id"]
+    judge_pass = result["evaluation"]["pass"]
+
+    # Cases 1-16 are designed to PASS.
+    # Cases 17-21 are deliberately designed to FAIL.
+    expected_pass = test_id <= 16
+
+    if expected_pass and judge_pass:
+        true_positives += 1
+
+    elif not expected_pass and not judge_pass:
+        true_negatives += 1
+
+    elif not expected_pass and judge_pass:
+        false_positives += 1
+
+    elif expected_pass and not judge_pass:
+        false_negatives += 1
+
 
 total = len(results)
 
-pass_rate = passed / total * 100
+correct_predictions = true_positives + true_negatives
+
+accuracy = correct_predictions / total * 100
 
 
 print("\n" + "=" * 70)
-print("DISPATCH EVALUATION SUMMARY")
+print("LLM JUDGE PERFORMANCE")
 print("=" * 70)
 
-print(f"Passed:   {passed}/{total}")
-print(f"Failed:   {total - passed}/{total}")
-print(f"Pass Rate: {pass_rate:.1f}%")
-
-print("\nResults saved to:")
-print("dispatch_evaluation_results.json")
+print(f"Total Cases:       {total}")
+print(f"True Positives:    {true_positives}")
+print(f"True Negatives:    {true_negatives}")
+print(f"False Positives:   {false_positives}")
+print(f"False Negatives:   {false_negatives}")
+print(f"Judge Accuracy:    {accuracy:.1f}%")

@@ -20,13 +20,17 @@ client = Anthropic(api_key=api_key)
 def evaluate_answer(question, expected_answer, actual_answer):
 
     prompt = f"""
-You are an expert QA engineer evaluating validation error messages
-for a smart thermostat demand-response event configuration system.
+You are an expert QA evaluator for a smart thermostat demand-response
+event validation system.
 
-Your job is to determine whether the ACTUAL validation error is
-semantically equivalent to the EXPECTED validation error.
+Your task is to determine whether the ACTUAL validation error represents
+the SAME validation rule as the EXPECTED validation error.
 
-Do NOT require the wording to be identical.
+IMPORTANT:
+Do NOT judge the messages as merely describing the same general problem,
+invalid event, or root cause.
+
+The validation rule itself must match.
 
 For example:
 
@@ -36,7 +40,8 @@ EXPECTED:
 ACTUAL:
 "Emergency events do not support precooling."
 
-These mean the same thing and should PASS.
+These are semantically equivalent because both prohibit precooling
+specifically for Emergency events.
 
 However:
 
@@ -44,13 +49,26 @@ EXPECTED:
 "Precool cannot be set for Emergency events."
 
 ACTUAL:
-"Precool duration must be greater than zero."
+"Start time is required."
 
-These describe different validation rules and should FAIL.
+These are NOT equivalent.
 
-Consider the meaning of the validation rule, not just matching words.
+They represent different validation rules.
 
-QUESTION / EVENT:
+Another example:
+
+EXPECTED:
+"End time must be after start time."
+
+ACTUAL:
+"Event duration must be greater than zero."
+
+These may both involve event timing, but they are NOT automatically
+equivalent because they validate different fields and different rules.
+
+Evaluate the following:
+
+QUESTION:
 {question}
 
 EXPECTED VALIDATION ERROR:
@@ -59,36 +77,62 @@ EXPECTED VALIDATION ERROR:
 ACTUAL VALIDATION ERROR:
 {actual_answer}
 
-Evaluate the ACTUAL validation error using these criteria.
+Evaluate these criteria from 1 to 5:
 
 1. correctness
-Does the actual error represent the same validation rule as the expected error?
+Does the actual error represent the same validation rule as the expected
+error?
 
 2. relevance
-Does the actual error relate directly to the event configuration?
+Does the actual error address the same validation condition?
 
 3. completeness
-Does the actual error communicate the important constraint expressed
-by the expected error?
+Does the actual error preserve the important constraint, field, event type,
+and condition from the expected error?
 
 4. hallucination
-Does the actual error introduce unsupported or unrelated information?
+Does the actual error introduce unsupported information?
 5 means no hallucination.
 
 5. overall_score
-Give an overall quality score from 1 to 5.
+Overall quality of the semantic match.
 
-PASS/FAIL RULE:
-Pass ONLY when the actual error is semantically equivalent to the
-expected error and overall_score is at least 4.
+SEMANTIC EQUIVALENCE RULES:
 
-Return ONLY valid JSON.
+A PASS requires that the expected and actual messages refer to the same
+validation rule.
 
+Pay particular attention to:
+
+- event type
+- field being validated
+- condition triggering the validation
+- allowed/disallowed behavior
+- timing relationship
+- numeric constraint
+- required vs optional fields
+
+Do NOT mark two messages as equivalent merely because:
+
+- they both indicate an invalid event
+- they have a similar root cause
+- they concern the same general topic
+- they both concern time
+- they both concern precooling
+- one problem could indirectly cause another problem
+
+If the validation rule is different, the result MUST be FAIL.
+
+PASS only when:
+1. The validation rule is semantically equivalent, AND
+2. overall_score >= 4.
+
+Return ONLY a JSON object.
 Do not use markdown.
 Do not use ```json.
-Do not include text before or after the JSON.
+Do not include any text before or after the JSON.
 
-The JSON must contain exactly these fields:
+The JSON must have exactly these fields:
 
 {{
     "correctness": 1,
@@ -96,7 +140,7 @@ The JSON must contain exactly these fields:
     "completeness": 1,
     "hallucination": 1,
     "overall_score": 1,
-    "pass": true,
+    "pass": false,
     "reason": "Brief explanation"
 }}
 """
