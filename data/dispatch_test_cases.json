@@ -67,8 +67,12 @@
   {
     "id": 10,
     "event_type": "SCHEDULED",
+    "start_time": "2026-09-05 14:00",
+    "end_time": "2026-09-05 16:00",
     "pre_cool": true,
     "pre_heat": false,
+    "duration_minutes": 60,
+    "pre_cool_start_time": "2026-09-05 15:00",
     "expected_error": "Precool cannot start after the event start time."
-  }
+}
 ]

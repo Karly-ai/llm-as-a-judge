@@ -30,10 +30,14 @@ def validate_event(event):
     if event_type == "SCHEDULED":
 
         if not start_time:
-            errors.append("Start time is required.")
+            errors.append(
+                "Start time is required."
+            )
 
         if not end_time:
-            errors.append("End time is required.")
+            errors.append(
+                "End time is required."
+            )
 
         if start_time and end_time and end_time <= start_time:
             errors.append(
@@ -41,12 +45,20 @@ def validate_event(event):
             )
 
     # Precool timing validation
+    pre_cool_start_time = event.get("pre_cool_start_time")
+
     if pre_cool and event_type == "SCHEDULED":
 
         if not start_time:
             errors.append(
                 "Start time is required for precool."
             )
+
+        elif pre_cool_start_time and pre_cool_start_time > start_time:
+            errors.append(
+                "Precool cannot start after the event start time."
+            )
+
     # Duration validation
     duration = event.get("duration_minutes")
 
@@ -61,9 +73,13 @@ def validate_event(event):
 if __name__ == "__main__":
 
     event = {
-        "event_type": "EMERGENCY",
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-05 14:00",
+        "end_time": "2026-09-05 16:00",
         "pre_cool": True,
-        "pre_heat": False
+        "pre_heat": False,
+        "duration_minutes": 60,
+        "pre_cool_start_time": "2026-09-05 15:00"
     }
 
     errors = validate_event(event)
