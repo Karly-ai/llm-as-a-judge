@@ -1,80 +1,79 @@
 [
-  {
-    "id": 1,
-    "event_type": "EMERGENCY",
-    "pre_cool": true,
-    "pre_heat": false,
-    "expected_error": "Precool cannot be set for Emergency events."
-  },
-  {
-    "id": 2,
-    "event_type": "EMERGENCY",
-    "pre_cool": false,
-    "pre_heat": true,
-    "expected_error": "Preheat cannot be set for Emergency events."
-  },
-  {
-    "id": 3,
-    "event_type": "EMERGENCY",
-    "pre_cool": true,
-    "pre_heat": true,
-    "expected_error": "Precool and Preheat cannot be set for Emergency events."
-  },
-  {
-    "id": 4,
-    "event_type": "SCHEDULED",
-    "start_time": "2026-09-05 14:00",
-    "end_time": "2026-09-05 13:00",
-    "expected_error": "End time must be after start time."
-  },
-  {
-    "id": 5,
-    "event_type": "SCHEDULED",
-    "start_time": "2026-09-05 13:00",
-    "end_time": "2026-09-05 14:00",
-    "duration_minutes": 0,
-    "expected_error": "Event duration must be greater than zero."
-  },
-  {
-    "id": 6,
-    "event_type": "SCHEDULED",
-    "start_time": null,
-    "end_time": "2026-09-05 14:00",
-    "expected_error": "Start time is required."
-  },
-  {
-    "id": 7,
-    "event_type": "SCHEDULED",
-    "start_time": "2026-09-05 13:00",
-    "end_time": null,
-    "expected_error": "End time is required."
-  },
-  {
-    "id": 8,
-    "event_type": "SCHEDULED",
-    "start_time": "2026-09-05 14:00",
-    "end_time": "2026-09-05 14:00",
-    "expected_error": "End time must be after start time."
-  },
-  {
-    "id": 9,
-    "event_type": "EMERGENCY",
-    "pre_cool": false,
-    "pre_heat": false,
-    "duration_minutes": -30,
-    "expected_error": "Event duration must be greater than zero."
-  },
-  {
-    "id": 10,
-    "event_type": "SCHEDULED",
-    "start_time": "2026-09-05 14:00",
-    "end_time": "2026-09-05 16:00",
-    "pre_cool": true,
-    "pre_heat": false,
-    "duration_minutes": 60,
-    "pre_cool_start_time": "2026-09-05 15:00",
-    "expected_error": "Precool cannot start after the event start time."
-},
+    {
+        "id": 1,
+        "event_type": "EMERGENCY",
+        "pre_cool": true,
+        "pre_heat": false,
+        "expected_error": "Precool cannot be set for Emergency events."
+    },
+    {
+        "id": 2,
+        "event_type": "EMERGENCY",
+        "pre_cool": false,
+        "pre_heat": true,
+        "expected_error": "Preheat cannot be set for Emergency events."
+    },
+    {
+        "id": 3,
+        "event_type": "EMERGENCY",
+        "pre_cool": true,
+        "pre_heat": true,
+        "expected_error": "Precool and Preheat cannot be set for Emergency events."
+    },
+    {
+        "id": 4,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-05 14:00",
+        "end_time": "2026-09-05 13:00",
+        "expected_error": "End time must be after start time."
+    },
+    {
+        "id": 5,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-05 13:00",
+        "end_time": "2026-09-05 14:00",
+        "duration_minutes": 0,
+        "expected_error": "Event duration must be greater than zero."
+    },
+    {
+        "id": 6,
+        "event_type": "SCHEDULED",
+        "start_time": null,
+        "end_time": "2026-09-05 14:00",
+        "expected_error": "Start time is required."
+    },
+    {
+        "id": 7,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-05 13:00",
+        "end_time": null,
+        "expected_error": "End time is required."
+    },
+    {
+        "id": 8,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-05 14:00",
+        "end_time": "2026-09-05 14:00",
+        "expected_error": "End time must be after start time."
+    },
+    {
+        "id": 9,
+        "event_type": "EMERGENCY",
+        "pre_cool": false,
+        "pre_heat": false,
+        "duration_minutes": -30,
+        "expected_error": "Event duration must be greater than zero."
+    },
+    {
+        "id": 10,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-05 14:00",
+        "end_time": "2026-09-05 16:00",
+        "pre_cool": true,
+        "duration_minutes": 60,
+        "pre_cool_start_time": "2026-09-05 15:00",
+        "expected_error": "Precool cannot start after the event start time."
+    },
     {
         "id": 11,
         "event_type": "EMERGENCY",
@@ -117,13 +116,11 @@
         "start_time": "2026-09-05 14:00",
         "end_time": "2026-09-05 16:00",
         "pre_cool": true,
-        "pre_heat": false,
         "duration_minutes": 60,
         "pre_cool_start_time": "2026-09-05 15:00",
         "expected_error": "Precooling cannot begin after the event starts."
     },
-
-        {
+    {
         "id": 17,
         "event_type": "EMERGENCY",
         "pre_cool": true,
@@ -157,11 +154,229 @@
         "start_time": "2026-09-05 14:00",
         "end_time": "2026-09-05 16:00",
         "pre_cool": true,
-        "pre_heat": false,
         "duration_minutes": 60,
         "pre_cool_start_time": "2026-09-05 15:00",
         "expected_error": "Start time is required."
+    },
+    {
+        "id": 22,
+        "event_type": "EMERGENCY",
+        "pre_cool": true,
+        "pre_heat": false,
+        "expected_error": "Emergency event configuration cannot include precooling."
+    },
+    {
+        "id": 23,
+        "event_type": "EMERGENCY",
+        "pre_cool": false,
+        "pre_heat": true,
+        "expected_error": "Emergency events do not permit preheating."
+    },
+    {
+        "id": 24,
+        "event_type": "EMERGENCY",
+        "pre_cool": true,
+        "pre_heat": true,
+        "expected_error": "Neither precooling nor preheating may be configured for Emergency events."
+    },
+    {
+        "id": 25,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 08:30",
+        "expected_error": "The end time cannot be earlier than the start time."
+    },
+    {
+        "id": 26,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 10:00",
+        "duration_minutes": -15,
+        "expected_error": "Event duration must be positive."
+    },
+    {
+        "id": 27,
+        "event_type": "SCHEDULED",
+        "start_time": null,
+        "end_time": "2026-09-10 10:00",
+        "expected_error": "The scheduled event requires a start time."
+    },
+    {
+        "id": 28,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": null,
+        "expected_error": "The scheduled event requires an end time."
+    },
+    {
+        "id": 29,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 10:00",
+        "end_time": "2026-09-10 10:00",
+        "expected_error": "The end time must be later than the start time."
+    },
+    {
+        "id": 30,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 11:00",
+        "pre_cool": true,
+        "pre_cool_start_time": "2026-09-10 11:30",
+        "expected_error": "Precool must begin before the event starts."
+    },
+    {
+        "id": 31,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 11:00",
+        "pre_cool": true,
+        "pre_cool_start_time": "2026-09-10 10:00",
+        "expected_error": "Precool cannot begin after the event start time."
+    },
+    {
+        "id": 32,
+        "event_type": "EMERGENCY",
+        "pre_cool": false,
+        "pre_heat": false,
+        "duration_minutes": -5,
+        "expected_error": "The event duration must be greater than zero."
+    },
+    {
+        "id": 33,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 11:00",
+        "duration_minutes": -60,
+        "expected_error": "Duration cannot be zero or negative."
+    },
+    {
+        "id": 34,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 11:00",
+        "pre_cool": true,
+        "pre_cool_start_time": "2026-09-10 12:00",
+        "expected_error": "Precool must not begin after the scheduled event starts."
+    },
+    {
+        "id": 35,
+        "event_type": "EMERGENCY",
+        "pre_cool": true,
+        "pre_heat": false,
+        "expected_error": "Emergency events require a positive duration."
+    },
+    {
+        "id": 36,
+        "event_type": "EMERGENCY",
+        "pre_cool": false,
+        "pre_heat": true,
+        "expected_error": "Emergency events require an end time."
+    },
+    {
+        "id": 37,
+        "event_type": "SCHEDULED",
+        "start_time": null,
+        "end_time": "2026-09-10 10:00",
+        "expected_error": "End time must be after start time."
+    },
+    {
+        "id": 38,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 08:00",
+        "expected_error": "Event duration must be greater than zero."
+    },
+    {
+        "id": 39,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 11:00",
+        "pre_cool": true,
+        "pre_cool_start_time": "2026-09-10 12:00",
+        "expected_error": "Start time is required."
+    },
+    {
+        "id": 40,
+        "event_type": "EMERGENCY",
+        "pre_cool": true,
+        "pre_heat": false,
+        "expected_error": "Scheduled events cannot have an end time before their start time."
+    },
+    {
+        "id": 41,
+        "event_type": "EMERGENCY",
+        "pre_cool": false,
+        "pre_heat": true,
+        "expected_error": "Event duration must be greater than zero."
+    },
+    {
+        "id": 42,
+        "event_type": "SCHEDULED",
+        "start_time": null,
+        "end_time": null,
+        "expected_error": "Preheat cannot be set for Emergency events."
+    },
+    {
+        "id": 43,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 08:00",
+        "expected_error": "Precool cannot be set for Emergency events."
+    },
+    {
+        "id": 44,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 11:00",
+        "pre_cool": true,
+        "pre_cool_start_time": "2026-09-10 12:00",
+        "expected_error": "Start time is required for the event."
+    },
+    {
+        "id": 45,
+        "event_type": "EMERGENCY",
+        "pre_cool": true,
+        "pre_heat": false,
+        "expected_error": "The event must contain a valid end time."
+    },
+    {
+        "id": 46,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 11:00",
+        "duration_minutes": 0,
+        "expected_error": "Precool cannot start after the event start time."
+    },
+    {
+        "id": 47,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 11:00",
+        "pre_cool": true,
+        "pre_cool_start_time": "2026-09-10 12:00",
+        "expected_error": "Event duration must be greater than zero."
+    },
+    {
+        "id": 48,
+        "event_type": "EMERGENCY",
+        "pre_cool": false,
+        "pre_heat": true,
+        "expected_error": "Precool cannot be set for Emergency events."
+    },
+    {
+        "id": 49,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 08:00",
+        "expected_error": "Start time is required."
+    },
+    {
+        "id": 50,
+        "event_type": "SCHEDULED",
+        "start_time": "2026-09-10 09:00",
+        "end_time": "2026-09-10 11:00",
+        "pre_cool": true,
+        "pre_cool_start_time": "2026-09-10 12:00",
+        "expected_error": "Preheat cannot be set for Emergency events."
     }
-
-
 ]
