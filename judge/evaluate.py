@@ -69,9 +69,9 @@ for result in results:
     test_id = result["id"]
     judge_pass = result["evaluation"]["pass"]
 
-    # Cases 1-16 are designed to PASS.
-    # Cases 17-21 are deliberately designed to FAIL.
-    expected_pass = test_id <= 16
+    # Cases 1-16 and 22-34 are designed to PASS.
+    # Cases 17-21 and 35-50 are deliberately designed to FAIL.
+    expected_pass = (1 <= test_id <= 16) or (22 <= test_id <= 34)
 
     if expected_pass and judge_pass:
         true_positives += 1
@@ -103,3 +103,18 @@ print(f"True Negatives:    {true_negatives}")
 print(f"False Positives:   {false_positives}")
 print(f"False Negatives:   {false_negatives}")
 print(f"Judge Accuracy:    {accuracy:.1f}%")
+
+# CI quality gate
+minimum_accuracy = 95.0
+
+if accuracy < minimum_accuracy:
+    print(
+        f"\nCI FAILED: Judge accuracy {accuracy:.1f}% "
+        f"is below the required {minimum_accuracy:.1f}%."
+    )
+    raise SystemExit(1)
+
+print(
+    f"\nCI PASSED: Judge accuracy {accuracy:.1f}% "
+    f"meets the required {minimum_accuracy:.1f}%."
+)
